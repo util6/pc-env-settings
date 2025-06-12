@@ -32,4 +32,3 @@ else
     exit 1
 fi
 
-echo -e "\n${GREEN}所有恢复任务完成！${NC}" 
