@@ -14,7 +14,7 @@ GREEN='\033[0;32m'
 NC='\033[0m'
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 PROJECT_DIR="$( dirname "$( dirname "$SCRIPT_DIR" )" )"
-BREWFILE_PATH="Brewfile"
+BREWFILE_PATH="${SCRIPT_DIR}/Brewfile"
 
 # --- 备份 Homebrew ---
 echo "正在备份 Homebrew 软件包..."
@@ -37,7 +37,8 @@ else
 fi
 
 # --- 备份 vfox SDKs ---
-echo -e "\n--- 正在执行 vfox 备份 ---"
-bash "${PROJECT_DIR}/vfox-env-manager.sh" backup
+# echo -e "\n--- 正在执行 vfox 备份 ---"
+# bash "${PROJECT_DIR}/vfox-env-manager.sh" backup
+# 注：vfox-env-manager.sh 脚本不存在，暂时注释掉
 
 echo -e "\n${GREEN}所有备份任务完成！${NC}" 

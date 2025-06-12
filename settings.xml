@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+    
+    <!-- 本地仓库路径设置 -->
+
+    <!-- 注意事项：
+Maven优先使用命令行参数指定的仓库路径
+其次使用settings.xml中的配置
+最后才是默认的~/.m2/repository路径
+${env.X}是Maven中引用环境变量的语法 -->
+
+    <localRepository>${env.MAVEN_REPO}</localRepository>
+    
+    <!-- 是否使用插件组的仓库 -->
+    <interactiveMode>true</interactiveMode>
+    
+    <!-- 是否使用插件的缓存 -->
+    <usePluginRegistry>false</usePluginRegistry>
+    
+    <!-- 是否需要在离线模式下运行 -->
+    <offline>false</offline>
+    
+    <!-- 插件组设置 -->
+    <pluginGroups>
+        <pluginGroup>org.apache.maven.plugins</pluginGroup>
+        <pluginGroup>org.codehaus.mojo</pluginGroup>
+    </pluginGroups>
+    
+    <!-- 服务器认证配置 -->
+    <servers>
+        <!-- 私有仓库认证信息示例 -->
+        <server>
+            <id>private-repo</id>
+            <username>username</username>
+            <!-- 使用加密密码 -->
+            <password>{加密密码}</password>
+        </server>
+        
+        <!-- 部署服务器认证信息示例 -->
+        <server>
+            <id>deployment-server</id>
+            <username>deploy-user</username>
+            <password>{加密密码}</password>
+        </server>
+    </servers>
+    
+    <!-- 镜像站点配置 -->
+    <mirrors>
+        <!-- 阿里云镜像 -->
+        <mirror>
+            <id>aliyun</id>
+            <mirrorOf>central</mirrorOf>
+            <name>Aliyun Maven Central</name>
+            <url>https://maven.aliyun.com/repository/central</url>
+        </mirror>
+        
+        <!-- 阿里云公共镜像 -->
+        <mirror>
+            <id>aliyun-public</id>
+            <mirrorOf>public</mirrorOf>
+            <name>Aliyun Public Repository</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+        </mirror>
+        
+        <!-- 阿里云谷歌镜像 -->
+        <mirror>
+            <id>aliyun-google</id>
+            <mirrorOf>google</mirrorOf>
+            <name>Aliyun Google Repository</name>
+            <url>https://maven.aliyun.com/repository/google</url>
+        </mirror>
+        
+        <!-- 阿里云Spring镜像 -->
+        <mirror>
+            <id>aliyun-spring</id>
+            <mirrorOf>spring</mirrorOf>
+            <name>Aliyun Spring Repository</name>
+            <url>https://maven.aliyun.com/repository/spring</url>
+        </mirror>
+    </mirrors>
+    
+    <!-- 代理设置 -->
+    <proxies>
+        <!-- HTTP代理示例 -->
+        <proxy>
+            <id>optional</id>
+            <active>false</active>
+            <protocol>http</protocol>
+            <host>proxy.example.com</host>
+            <port>8080</port>
+            <username>proxyuser</username>
+            <password>proxypass</password>
+            <nonProxyHosts>localhost|127.0.0.1</nonProxyHosts>
+        </proxy>
+    </proxies>
+    
+    <!-- 配置文件 -->
+    <profiles>
+        <!-- JDK 1.8 配置 -->
+        <profile>
+            <id>jdk-1.8</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <jdk>1.8</jdk>
+            </activation>
+            <properties>
+                <maven.compiler.source>1.8</maven.compiler.source>
+                <maven.compiler.target>1.8</maven.compiler.target>
+                <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+            </properties>
+        </profile>
+        
+        <!-- JDK 11 配置 -->
+        <profile>
+            <id>jdk-11</id>
+            <activation>
+                <jdk>11</jdk>
+            </activation>
+            <properties>
+                <maven.compiler.source>11</maven.compiler.source>
+                <maven.compiler.target>11</maven.compiler.target>
+                <maven.compiler.compilerVersion>11</maven.compiler.compilerVersion>
+            </properties>
+        </profile>
+        
+        <!-- JDK 17 配置 -->
+        <profile>
+            <id>jdk-17</id>
+            <activation>
+                <jdk>17</jdk>
+            </activation>
+            <properties>
+                <maven.compiler.source>17</maven.compiler.source>
+                <maven.compiler.target>17</maven.compiler.target>
+                <maven.compiler.compilerVersion>17</maven.compiler.compilerVersion>
+            </properties>
+        </profile>
+        
+        <!-- JDK 21 配置 -->
+        <profile>
+            <id>jdk-21</id>
+            <activation>
+                <jdk>21</jdk>
+            </activation>
+            <properties>
+                <maven.compiler.source>21</maven.compiler.source>
+                <maven.compiler.target>21</maven.compiler.target>
+                <maven.compiler.compilerVersion>21</maven.compiler.compilerVersion>
+            </properties>
+        </profile>
+        
+        <!-- 自定义仓库配置 -->
+        <profile>
+            <id>custom-repositories</id>
+            <repositories>
+                <repository>
+                    <id>central</id>
+                    <name>Maven Central</name>
+                    <url>https://repo.maven.apache.org/maven2</url>
+                </repository>
+                <repository>
+                    <id>spring-releases</id>
+                    <name>Spring Releases</name>
+                    <url>https://repo.spring.io/release</url>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>central</id>
+                    <name>Maven Central</name>
+                    <url>https://repo.maven.apache.org/maven2</url>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
+    
+    <!-- 激活的配置文件 -->
+    <activeProfiles>
+        <activeProfile>jdk-1.8</activeProfile>
+        <activeProfile>custom-repositories</activeProfile>
+    </activeProfiles>
+    
+</settings> 

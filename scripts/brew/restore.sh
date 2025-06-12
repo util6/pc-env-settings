@@ -14,7 +14,7 @@ GREEN='\033[0;32m'
 NC='\033[0m'
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 PROJECT_DIR="$( dirname "$SCRIPT_DIR" )"
-BREWFILE_PATH="${PROJECT_DIR}/Brewfile"
+BREWFILE_PATH="${SCRIPT_DIR}/Brewfile"
 
 # --- 恢复 Homebrew ---
 echo "正在恢复 Homebrew 软件包..."
